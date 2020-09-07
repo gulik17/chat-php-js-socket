@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
             chat_message: msg,
         };
         document.getElementById("chat_user").setAttribute("disabled", "disabled");
+        document.getElementById("chat_message").value = "";
         socket.send(JSON.stringify(message));
     }
 });
