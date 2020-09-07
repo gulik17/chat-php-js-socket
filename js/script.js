@@ -1,5 +1,5 @@
 function message(text) {
-    document.getElementById("chat-result").innerHTML += "<div>" + text + "</div>";
+    document.getElementById("chat-result").innerHTML += "<div><div class='msg'>" + text + "</div></div>";
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -20,8 +20,33 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     socket.onmessage = function(event) {
-        var data = JSON.parse(event.data);
-        message(data.type + " — " + data.message);
+        let data = JSON.parse(event.data);
+        if (data.type == "chat-box") {
+            message(data.message);
+        } else {
+            message(data.type + " — " + data.message);
+        }
+    }
+
+    chat_btn.onclick = function(evt) {
+        evt.preventDefault();
+        let usr = document.getElementById("chat_user").value;
+        let msg = document.getElementById("chat_message").value;
+
+        if (!usr) {
+            alert("Укажите ваше имя");
+            return false;
+        }
+        if (!msg) {
+            alert("Введите сообщение");
+            return false;
+        }
+
+        let message = {
+            chat_user: usr,
+            chat_message: msg,
+        };
+        document.getElementById("chat_user").setAttribute("disabled", "disabled");
+        socket.send(JSON.stringify(message));
     }
 });
-

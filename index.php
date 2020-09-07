@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <form action="">
-        <div class="chat-result" id ="chat-result">
-            
-        </div>
-    </form>
+    <div class="chat-result" id ="chat-result"></div>
+    <div class="enter-fields">
+        <input type="text" id="chat_user" placeholder="Name" />
+        <input type="text" id="chat_message" placeholder="Message" />
+        <button id="chat_btn">Send</button>
+    </div>
     <script src="/js/script.js"></script>
 </body>
 </html>
